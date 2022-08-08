@@ -20,11 +20,11 @@ export default function Login(){
         console.log(API_URL)
         event.preventDefault();
         const body = { email, password}
-        axios.post(`${API_URL}`,body)
+        axios.post(`${API_URL}/signin`,body)
         .then(res=>{
-            // setUser({name = })
+            setUser(res.data)
             console.log(res.data)
-            navigate("/signup")
+            navigate("/")
         })
         .catch(err=> console.log(err.response.data))
     }
