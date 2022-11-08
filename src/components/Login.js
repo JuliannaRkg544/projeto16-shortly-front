@@ -23,16 +23,20 @@ export default function Login(){
         axios.post(`${API_URL}/signin`,body)
         .then(res=>{
             setUser(res.data)
+            localStorage.setItem("user", res.data.name)
+            localStorage.setItem("token", res.data.token)
             console.log(res.data)
-            navigate("/")
+            navigate("/shortly")
         })
-        .catch(err=> console.log(err.response.data))
+        .catch(err=> {
+            alert(err.response.data)
+            console.log(err.response.data)})
     }
     
     return(
-        
+        <>
+        <Header/>
         <Style>
-            <Header/>
 
             <div className="inputs"> 
             <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} ></input>
@@ -41,5 +45,6 @@ export default function Login(){
             <button onClick={handlesubmmit} > Entrar</button>
            
         </Style>
+        </>
     )
 }

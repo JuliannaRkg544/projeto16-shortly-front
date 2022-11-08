@@ -27,7 +27,9 @@ export default function Signup(){
             console.log(res.data)
             navigate("/login")
         })
-        .catch(err=> console.log(err.response.data))
+        .catch(err=> {
+            alert(err.response.data.message)
+            console.log(err.response.data)})
     }
 
    return(

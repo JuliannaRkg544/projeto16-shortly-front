@@ -6,7 +6,8 @@ import { useContext } from "react";
 import axios from "axios";
 
 export default function Header() {
-    const {user,setUser} = useContext(UserContext) 
+    // const {user,setUser} = useContext(UserContext) 
+    const user =  localStorage.getItem("user")
     if (!user){
         return (
             <>
@@ -34,7 +35,7 @@ export default function Header() {
               <Top>
                 <div>
                 <Link to={"/shortly"}>
-                    <p> Seja bem vindo {user.name} </p>
+                    <p> Seja bem vindo {user} </p>
                   </Link>
                   <Link to={"/"}>
                     <p> Home </p>
@@ -42,8 +43,8 @@ export default function Header() {
                   <Link to={"/"}>
                     <p> Ranking </p>
                   </Link>
-                  <Link to={"/"}>
-                    <p onClick={logout}>Sair</p>{" "}
+                  <Link to={"/login"}>
+                    <p onClick={()=>logout()}>Sair</p>{" "}
                   </Link>
                 </div>
               </Top>
@@ -56,33 +57,33 @@ export default function Header() {
     }
  
     function logout(){
-        setUser("")
+        localStorage.removeItem("user")
     }
 }
 
 const Top = styled.div`
-  position: fixed;
   top: 20px;
-
   display: flex;
   width: 100vw;
-  justify-content: end;
-  padding-right: 100px;
-  padding-left: 100px;
+  position: fixed;
+  padding-right: 80px;
+  padding-left: 80px;
   margin-right: 20px;
   a {
     text-decoration: none;
     color: #000;
     width: 100%;
+    display: flex;
   }
   div {
     display: flex;
-    width: 100%;
+    width: 100vw;
+    justify-content: space-evenly;
+
      }
   p{
     width: 100%;
-    display: flex;
-    justify-content: center;
+   
 
   }
 `;
